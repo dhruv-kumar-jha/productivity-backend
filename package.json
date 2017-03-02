@@ -1,0 +1,39 @@
+{
+  "name": "productivity-backend",
+  "version": "1.0.0",
+  "description": "Backend for the productivity application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruv-kumar-jha/productivity-backend.git"
+  },
+  "keywords": [
+    "Productivity Application",
+    "Todo List",
+    "Trello Clone",
+    "Backend"
+  ],
+  "author": "dhruv@dhruvkumarjha.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dhruv-kumar-jha/productivity-backend/issues"
+  },
+  "homepage": "https://github.com/dhruv-kumar-jha/productivity-backend#readme",
+  "dependencies": {
+    "app-module-path": "^2.2.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.17.0",
+    "cors": "^2.8.1",
+    "express": "^4.15.0",
+    "express-graphql": "^0.6.3",
+    "graphql": "^0.9.1",
+    "jsonwebtoken": "^7.3.0",
+    "lodash": "^4.17.4",
+    "loka": "^1.0.1",
+    "mongoose": "^4.8.5"
+  }
+}
