@@ -12,13 +12,13 @@ const expressGraphQL = require('express-graphql');
 const GraphQLSchema = require('app/graphql');
 
 mongoose.Promise = require('bluebird');
-mongoose.connect( process.env.DATABASE_HOST || config.database.HOST );
+mongoose.connect( config.database.HOST );
 
 
 
 const app = express();
 
-app.set( 'port', process.env.PORT || config.server.PORT );
+app.set( 'port', config.server.PORT );
 app.disable('x-powered-by');
 
 app.use( cors({ optionsSuccessStatus: 200 }) );

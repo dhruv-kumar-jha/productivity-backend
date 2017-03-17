@@ -1,7 +1,16 @@
 'use strict';
 
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
 const Helper = require('app/global/helpers/Mongoose');
+
+const TodoSchema = mongoose.Schema({
+	title: { type: String },
+	description: { type: String },
+	completed: { type: Boolean },
+});
+
 
 const CardSchema = mongoose.Schema(
 	{
@@ -17,9 +26,15 @@ const CardSchema = mongoose.Schema(
 		description: {
 			type: String
 		},
-		position: {
-			type: Number
+
+		// this will contain info like duedate, images, customizations, etc
+		meta: {
+			type: mongoose.Schema.Types.Mixed,
+			default: {}
 		},
+
+		todos: [ TodoSchema ],
+
 		status: {
 			type: Number,
 			default: 1

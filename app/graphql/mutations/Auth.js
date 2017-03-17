@@ -22,11 +22,7 @@ const UserAuthTokenType = new GraphQL.GraphQLObjectType({
 		token: {
 			type: GraphQLString,
 			description: 'Authentication token of the logged in user',
-		},
-		error: {
-			type: GraphQLMixed,
-			description: 'Error information, if any',
-		},
+		}
 	})
 
 });

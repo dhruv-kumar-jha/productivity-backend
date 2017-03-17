@@ -1,7 +1,7 @@
 'use strict';
 
 const Loka = require('loka');
-
+const _  = require('lodash');
 
 class ModelController {
 
@@ -11,13 +11,29 @@ class ModelController {
 	}
 
 
+	transform(records) {
+		if ( this._transform ) {
+			if ( Array.isArray(records) ) {
+				records.map( record => {
+					record = this._transform(record);
+				});
+				return records;
+			}
+			else {
+				return this._transform(records);
+			}
+		}
+		return records;
+	}
+
+
 	index(options, conditions={}) {
 		return this.model.find(conditions)
 			.populate(options.populate)
 			.sort('created_at')
 			.exec()
 			.then( records => {
-				return records;
+				return this.transform(records);
 			})
 			.catch( error => {
 				return error;
@@ -25,12 +41,13 @@ class ModelController {
 	}
 
 
-	single(options) {
-		return this.model.findById(options.id)
+	single( options, conditions={} ) {
+		const findConditions = conditions ? conditions : { _id: options.id };
+		return this.model.findOne(findConditions)
 			.populate(options.populate)
 			.exec()
 			.then( record => {
-				return record;
+				return this.transform(record);
 			})
 			.catch( error => {
 				return error;
@@ -42,7 +59,7 @@ class ModelController {
 		const record = new this.model(data);
 		return record.save()
 			.then( (record) => {
-				return record;
+				return this.transform(record);
 			})
 			.catch( (error) => {
 				return error;
@@ -60,15 +77,25 @@ class ModelController {
 			.exec()
 			.then( record => {
 				if ( record ) {
+					// console.log('data',data, 'record',record);
 					Object.keys(data).map( field => {
 						if ( field != 'id' ) {
-							record[field] = data[field];
+							if ( record[field] && record[field].constructor === Object ) {
+								if ( field === '_list' ) {
+									record[field] = data[field];
+								} else {
+									const updated = Object.assign( {}, record[field], data[field] );
+									record[field] = updated;
+								}
+							} else {
+								record[field] = data[field];
+							}
 						}
 					});
 
 					return record.save()
 						.then( updated => {
-							return updated;
+							return this.transform(updated);
 						})
 						.catch( (error) => {
 							return error;
@@ -84,6 +111,38 @@ class ModelController {
 
 
 
+	findOne( options, populate=[] ) {
+		return this.model.findOne(options)
+			.populate(populate)
+			.exec()
+			.then( record => {
+				return this.transform(record);
+			})
+			.catch( error => {
+				return error;
+			});
+	}
+
+
+	delete( data ) {
+		// this.model.findByIdAndRemove( data.id ).exec();
+		// return data;
+
+		this.model.findById(data.id)
+			.exec()
+			.then( record => {
+				record.remove();
+			})
+			.catch( error => {
+				return error;
+			});
+
+		return Object.assign( {}, data, { status: 10 } );
+
+	}
+
+
+
 
 
 
@@ -91,3 +150,22 @@ class ModelController {
 }
 
 module.exports = ModelController;
+
+/*
+
+					Object.keys(data).map( field => {
+						if ( field != 'id' ) {
+							if ( _.isObject( record[field] ) ) {
+								if ( record[field].constructor === Array ) {
+									record[field] = data[field];
+								} else {
+									const updated = Object.assign( {}, record[field], data[field] );
+									record[field] = updated;
+								}
+							} else {
+								record[field] = data[field];
+							}
+						}
+					});
+
+ */

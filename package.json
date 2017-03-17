@@ -4,7 +4,8 @@
   "description": "Backend for the productivity application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start:production": "cross-env NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
   "keywords": [
     "Productivity Application",
     "Todo List",
-    "Trello Clone",
+    "Trello Inspired",
     "Backend"
   ],
   "author": "dhruv@dhruvkumarjha.com",
@@ -28,6 +29,7 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.17.0",
     "cors": "^2.8.1",
+    "cross-env": "^3.2.4",
     "express": "^4.15.0",
     "express-graphql": "^0.6.3",
     "graphql": "^0.9.1",

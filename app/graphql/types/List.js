@@ -1,7 +1,6 @@
 'use strict';
 
 const GraphQL = require('graphql');
-const GraphQLMixed = require('app/global/graphql/types/GraphQLMixed');
 const GraphQLField = require('app/global/graphql/fields');
 
 const {
@@ -36,9 +35,10 @@ const ListType = new GraphQL.GraphQLObjectType({
 			type: GraphQLString,
 			description: 'Description of the list',
 		},
-		position: {
-			type: GraphQLInt,
-			description: 'Position of the list',
+
+		positions: {
+			type: new GraphQLList(GraphQLID),
+			description: 'Array containing card ids in sorted order',
 		},
 
 		cards: {

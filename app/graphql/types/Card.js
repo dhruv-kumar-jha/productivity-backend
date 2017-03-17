@@ -9,6 +9,7 @@ const {
 	GraphQLString,
 	GraphQLID,
 	GraphQLInt,
+	GraphQLList,
 } = GraphQL;
 
 
@@ -33,9 +34,14 @@ const CardType = new GraphQL.GraphQLObjectType({
 			type: GraphQLString,
 			description: 'Description of the card',
 		},
-		position: {
-			type: GraphQLInt,
-			description: 'Position of the card',
+		meta: {
+			type: GraphQLMixed,
+			description: 'Meta information about this card',
+		},
+
+		todos: {
+			type: new GraphQLList(GraphQLMixed),
+			description: 'Todo items associated with this card',
 		},
 
 		status: GraphQLField.status(),

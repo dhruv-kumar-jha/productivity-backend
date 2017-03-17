@@ -8,6 +8,7 @@ const {
 
 
 const AuthMutation = require('./mutations/Auth');
+const AuthQuery = require('./queries/Auth');
 
 const UserQuery = require('./queries/User');
 const UserMutation = require('./mutations/User');
@@ -34,6 +35,8 @@ const RootQuery = new GraphQLObjectType({
 		user: UserQuery.single(),
 		current_user: UserQuery.current(),
 
+		logout: AuthQuery.logout(),
+
 		boards: BoardQuery.index(),
 		board: BoardQuery.single(),
 
@@ -56,12 +59,24 @@ const RootMutation = new GraphQLObjectType({
 
 		addBoard: BoardMutation.create(),
 		updateBoard: BoardMutation.update(),
+		updateListPositions: BoardMutation.updateListPositions(),
+		deleteBoard: BoardMutation.delete(),
+
 
 		addList: ListMutation.create(),
 		updateList: ListMutation.update(),
+		deleteList: ListMutation.delete(),
+		updateCardPositions: ListMutation.updateCardPositions(),
 
 		addCard: CardMutation.create(),
 		updateCard: CardMutation.update(),
+		updateCardList: CardMutation.updateCardList(),
+		deleteCard: CardMutation.delete(),
+
+		addTodo: CardMutation.addTodo(),
+		updateTodo: CardMutation.updateTodo(),
+		deleteTodo: CardMutation.deleteTodo(),
+
 
 	},
 });

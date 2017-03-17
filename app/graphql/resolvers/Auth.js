@@ -17,11 +17,11 @@ class AuthController extends ModelController {
 			.exec()
 			.then( user => {
 				if ( ! user ) {
-					return { error: { message: 'Invalid email and/or password provided' } };
+					throw new Error('Invalid email and/or password provided');
 				}
 
 				if ( ! user.comparePassword(options.password) ) {
-					return { error: { message: 'Incorrect password provided' } };
+					throw new Error('Invalid password provided');
 				}
 
 				if ( user && user.comparePassword(options.password) ) {
@@ -35,6 +35,13 @@ class AuthController extends ModelController {
 			});
 
 	}
+
+
+	logout(options) {
+		const id = this.store.user.id;
+		return { id: id };
+	}
+
 
 
 

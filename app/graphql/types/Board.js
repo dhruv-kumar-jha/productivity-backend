@@ -38,7 +38,12 @@ const BoardType = new GraphQL.GraphQLObjectType({
 		},
 		meta: {
 			type: GraphQLMixed,
-			description: 'Meta information about the user',
+			description: 'Meta information about this board',
+		},
+
+		positions: {
+			type: new GraphQLList(GraphQLID),
+			description: 'Array containing list ids in sorted order',
 		},
 
 		user: {

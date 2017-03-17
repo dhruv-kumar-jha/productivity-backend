@@ -11,8 +11,8 @@ const UserHelper = {
 			data,
 			config.server.WEB_TOKEN_SECRET,
 			{
-				expiresIn: '60m'
-			}  // 10m, 24h
+				expiresIn: '24h'
+			}  // 10m, 24h, 60m
 		);
 	},
 

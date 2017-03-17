@@ -1,6 +1,10 @@
 'use strict';
 
 const Loka = require('loka');
+const User = require('app/services/models/User');
+const jwt = require('jsonwebtoken');
+const config = require('app/global/config');
+const Response = require('app/global/helpers/Response');
 
 module.exports = ( req, res, next ) => {
 
@@ -10,24 +14,44 @@ module.exports = ( req, res, next ) => {
 	];
 
 	// we wont be using route paths, as we're using graphql, so make necessary changes here.
-
-
 	if( req.method === 'POST' && ! ignored_routes.includes(req.path) ) {
 		// we need to validate users auth token
 
-		// fetch the user details directly from the token, specified in Header
-		// if token not specied, return an error back to the user.
+		const authorization_header = req.headers.authorization;
+		let token;
+		if ( authorization_header ) { token = authorization_header.split(" ")[1]; }
 
-		const current_user = {
-			id: "58b7d6b36ffc5d0f1c2feedc", // 58b7f7473294da15483b7b9a
-			name: "John Doe",
-			email: "john.doe@gmail.com"
-		};
 
-		req.user = current_user; // just incase we decide to access current user info from req object
-		Loka.set('user', current_user); // setting it using loka, so this can be accessed from other files.
+		if ( token ) {
 
-		next();
+			// reset the user data, for every request.
+			Loka.set('user', {});
+
+			jwt.verify( token, config.server.WEB_TOKEN_SECRET, (err, decoded_user) => {
+				if ( err ) {
+					if ( err.name === 'TokenExpiredError' ) {
+						// throw new Error('Your token has expired. please login again to generate new token.');
+						res.json( Response.error(401, 'Unauthorized', 'Your token has expired. please login again to generate new token.') );
+					} else {
+						res.json( Response.authError() );
+					}
+				}
+				else {
+					User.findById( decoded_user.id, (error, user) => {
+						if (error) {
+							res.json( Response.authError() );
+						} else {
+							req.user = user; // just incase we decide to access current user info from req object
+							Loka.set('user', user); // setting it using loka, so this can be accessed from other files.
+							setTimeout( () => { next(); }, 1000);
+						}
+					});
+				}
+			});
+
+		} else {
+			next();
+		}
 
 	}
 	else {

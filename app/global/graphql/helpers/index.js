@@ -25,8 +25,22 @@ const Helper = {
 		}
 
 		if ( fields.lists ) {
-			if ( fields.lists.cards ) { populate.push({ path: 'lists', populate: { path: 'cards' } }); }
-			else { populate.push({ path: 'lists' }); }
+			if ( fields.lists.cards ) {
+				populate.push({
+					path: 'lists',
+					options: { sort: { created_at: 1 } },
+					populate: {
+						path: 'cards',
+						options: { sort: { created_at: 1 } }
+					}
+				});
+			}
+			else {
+				populate.push({
+					path: 'lists',
+					options: { sort: { created_at: 1 } },
+				});
+			}
 		}
 
 		return populate;
