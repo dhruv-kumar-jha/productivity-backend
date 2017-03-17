@@ -29,7 +29,6 @@ Todos:
 - [ ] Allow user to specify **Port Number** using Environment variables
 - [ ] Allow user to specify **Database Host** using Environment variables
 - [ ] Allow user to specify **Web Token Secret** using Environment variables
-
 - [x] Create the project
 - [x] Setup Mongoose and Mongoose Models
 - [x] Setup GraphQL and its Types, Queries, Mutations and Resolvers.
