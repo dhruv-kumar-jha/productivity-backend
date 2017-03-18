@@ -4,7 +4,8 @@
   "description": "Backend for the productivity application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js",
     "start:production": "cross-env NODE_ENV=production node server.js"
   },
   "repository": {

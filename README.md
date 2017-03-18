@@ -23,6 +23,8 @@ MONGODB="mongodb://fldsde8074:zxcvbn@ds0439839.mLab.com:29017/fldsde8074"
 
 This is all that matters at the moment.
 
+You can checkout the frontend code of this app at https://github.com/dhruv-kumar-jha/productivity-frontend
+
 
 Todos:
 
