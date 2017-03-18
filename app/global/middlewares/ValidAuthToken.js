@@ -8,13 +8,13 @@ const Response = require('app/global/helpers/Response');
 
 module.exports = ( req, res, next ) => {
 
+
+	// incase we add different routes and dont want to run this middleware when they are accessed.
 	const ignored_routes = [
-		'/auth',
-		'/auth/register',
 	];
 
 	// we wont be using route paths, as we're using graphql, so make necessary changes here.
-	if( req.method === 'POST' && ! ignored_routes.includes(req.path) ) {
+	if( ! ignored_routes.includes(req.path) ) {
 		// we need to validate users auth token
 
 		const authorization_header = req.headers.authorization;
@@ -43,14 +43,28 @@ module.exports = ( req, res, next ) => {
 						} else {
 							req.user = user; // just incase we decide to access current user info from req object
 							Loka.set('user', user); // setting it using loka, so this can be accessed from other files.
-							setTimeout( () => { next(); }, 1000);
+							next();
+							// setTimeout( () => { next(); }, 1000); // using this to manually delay the response.
 						}
 					});
 				}
 			});
 
 		} else {
-			next();
+
+			if ( req.method === 'POST' ) {
+				const operationName = req.body.operationName;
+
+				if ( operationName === 'Login' || operationName === 'Signup' ) {
+					next();
+				} else {
+					return res.json({ code: 400, error: true, message: 'Authentication error occoured, you must be logged in to access the server.' });
+				}
+
+			} else {
+				return res.json({ code: 400, error: true, message: 'authentication error occoured, you must be logged in to access the server.' });
+			}
+
 		}
 
 	}

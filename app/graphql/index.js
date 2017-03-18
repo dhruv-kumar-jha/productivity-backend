@@ -56,6 +56,7 @@ const RootMutation = new GraphQLObjectType({
 		login: AuthMutation.login(),
 
 		addUser: UserMutation.create(),
+		updateUser: UserMutation.update(),
 
 		addBoard: BoardMutation.create(),
 		updateBoard: BoardMutation.update(),

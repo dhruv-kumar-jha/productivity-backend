@@ -15,7 +15,9 @@
     "Productivity Application",
     "Todo List",
     "Trello Inspired",
-    "Backend"
+    "Backend",
+    "GraphQL",
+    "Express Graphql"
   ],
   "author": "dhruv@dhruvkumarjha.com",
   "license": "MIT",

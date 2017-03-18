@@ -57,6 +57,49 @@ module.exports = {
 
 
 
+	update() {
+		return {
+			type: UserType,
+			description: 'Update user details',
+
+			args: {
+				id: {
+					type: new GraphQLNonNull(GraphQLID),
+					description: 'Enter user id',
+				},
+				name: {
+					type: GraphQLString,
+					description: 'Enter users full name, Cannot be left empty',
+				},
+				email: {
+					type: GraphQLString,
+					description: 'Enter users email address, Must be valid and unique',
+				},
+				password: {
+					type: GraphQLString,
+					description: 'Enter users password, will be automatically hashed',
+				},
+				phone: {
+					type: GraphQLString,
+					description: 'Enter users phone number',
+				},
+				dob: {
+					type: GraphQLString,
+					description: 'Enter users date of birth, Format: YYYY-MM-DD',
+				},
+				gender: {
+					type: GraphQLInt,
+					description: 'Enter users gender, 1: Male, 2: Female, Default 0: not specified',
+				},
+			},
+			resolve(parent, fields) {
+				return UserResolver.update(fields);
+			}
+		}
+	},
+
+
+
 
 
 };

@@ -29,12 +29,12 @@ app.use( body_parser.urlencoded({ limit: '50mb', extended: true }) );
 app.use( ValidAuthTokenMiddleware );
 
 
-// disable in production., so other users cant access the graphiql ui
+// disable graphiql in production., so other users cant access the graphiql ui
 app.use(
 	'/graphql',
 	expressGraphQL( () => {
 		return {
-			graphiql: true,
+			graphiql: false,
 			schema: GraphQLSchema,
 		}
 	})
