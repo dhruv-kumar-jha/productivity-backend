@@ -1,6 +1,7 @@
 'use strict';
 
 const GraphQL = require('graphql');
+const GraphQLMixed = require('app/global/graphql/types/GraphQLMixed');
 const GraphQLField = require('app/global/graphql/fields');
 
 const {
@@ -34,6 +35,10 @@ const ListType = new GraphQL.GraphQLObjectType({
 		description: {
 			type: GraphQLString,
 			description: 'Description of the list',
+		},
+		meta: {
+			type: GraphQLMixed,
+			description: 'Meta information about this list',
 		},
 
 		positions: {

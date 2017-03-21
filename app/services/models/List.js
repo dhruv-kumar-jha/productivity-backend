@@ -21,6 +21,11 @@ const ListSchema = mongoose.Schema(
 			type: String
 		},
 
+		meta: {
+			type: mongoose.Schema.Types.Mixed,
+			default: {}
+		},
+
 		// store position of all the cards in this list.
 		positions: [],
 

@@ -1,10 +1,10 @@
 {
   "name": "productivity-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backend for the productivity application",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "start:dev": "nodemon server.js",
     "start:production": "cross-env NODE_ENV=production node server.js"
   },

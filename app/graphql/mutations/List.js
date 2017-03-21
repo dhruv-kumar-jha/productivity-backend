@@ -7,6 +7,7 @@ const {
 	GraphQLID,
 	GraphQLList,
 } = GraphQL;
+const GraphQLMixed = require('app/global/graphql/types/GraphQLMixed');
 
 const ListType = require('../types/List');
 const ListResolver = require('../resolvers/List');
@@ -57,6 +58,10 @@ module.exports = {
 					type: GraphQLString,
 					description: 'Enter list description',
 				},
+				meta: {
+					type: GraphQLMixed,
+					description: 'Enter list meta information',
+				}
 			},
 			resolve(parent, fields) {
 				return ListResolver.update(fields);

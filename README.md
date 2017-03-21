@@ -1,7 +1,10 @@
 # Productivity Backend
 Productivity Application - Backend
 
-### Installation
+## Installation
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/dhruv-kumar-jha/productivity-backend)
+
 
 Just clone this repo
 and then do `yarn install` or `npm install` to install all the dependencies.
@@ -28,9 +31,10 @@ You can checkout the frontend code of this app at https://github.com/dhruv-kumar
 
 Todos:
 
-- [ ] Allow user to specify **Port Number** using Environment variables
-- [ ] Allow user to specify **Database Host** using Environment variables
-- [ ] Allow user to specify **Web Token Secret** using Environment variables
+- [x] Add **Deploy to Heroku** button
+- [x] Allow user to specify **Port Number** using Environment variables
+- [x] Allow user to specify **Database Host** using Environment variables
+- [x] Allow user to specify **Web Token Secret** using Environment variables
 - [x] Create the project
 - [x] Setup Mongoose and Mongoose Models
 - [x] Setup GraphQL and its Types, Queries, Mutations and Resolvers.
