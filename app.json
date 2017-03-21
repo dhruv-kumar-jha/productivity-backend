@@ -2,7 +2,6 @@
   "name": "Productivity Application",
   "description": "Backend for the productivity application",
   "repository": "https://github.com/dhruv-kumar-jha/productivity-backend",
-  "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["node", "GraphQL", "express", "mongoose"],
   "env": {
     "SECRET_TOKEN": {
