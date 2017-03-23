@@ -40,6 +40,8 @@ const RootQuery = new GraphQLObjectType({
 		boards: BoardQuery.index(),
 		board: BoardQuery.single(),
 
+		publicBoard: BoardQuery.public_single(),
+
 		lists: ListQuery.index(),
 		list: ListQuery.single(),
 

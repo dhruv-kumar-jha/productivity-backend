@@ -13,6 +13,15 @@ module.exports = ( req, res, next ) => {
 	const ignored_routes = [
 	];
 
+	// these can be accessed by users without logging in.
+	const publicOperations = [
+		'Login',
+		'Signup',
+		'Logout',
+		'PublicBoard',
+	];
+
+
 	// we wont be using route paths, as we're using graphql, so make necessary changes here.
 	if( ! ignored_routes.includes(req.path) ) {
 		// we need to validate users auth token
@@ -53,9 +62,11 @@ module.exports = ( req, res, next ) => {
 		} else {
 
 			if ( req.method === 'POST' ) {
+
 				const operationName = req.body.operationName;
 
-				if ( operationName === 'Login' || operationName === 'Signup' ) {
+				// if ( operationName === 'Login' || operationName === 'Signup' || operationName === 'Logout' ) {
+				if ( publicOperations.includes(operationName) ) {
 					next();
 				} else {
 					return res.json({ code: 400, error: true, message: 'Authentication error occoured, you must be logged in to access the server.' });

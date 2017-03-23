@@ -43,6 +43,23 @@ module.exports = {
 	},
 
 
+	public_single() {
+		return {
+			type: BoardType,
+			description: 'This will return data of a single board based on Id, Only if the board is made public',
+			args: {
+				id: {
+					type: new GraphQLNonNull(GraphQLID),
+					description: 'Please enter ID of the Board',
+				}
+			},
+			resolve(parent, args, context, info) {
+				const populate = GraphQLHelper.getBoardPopulate(info);
+				return BoardResolver.public_single({ id: args.id, populate });
+			}
+		}
+	}
+
 
 };
 

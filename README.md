@@ -31,6 +31,7 @@ You can checkout the frontend code of this app at https://github.com/dhruv-kumar
 
 Todos:
 
+- [x] Added functionality to make the board **publicly accessible**.
 - [x] Add **Deploy to Heroku** button
 - [x] Allow user to specify **Port Number** using Environment variables
 - [x] Allow user to specify **Database Host** using Environment variables

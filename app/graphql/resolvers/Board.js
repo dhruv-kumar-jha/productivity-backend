@@ -26,6 +26,12 @@ class BoardController extends ModelController {
 		return super.single(options, { _id: options.id, _user: this.store.user.id });
 	}
 
+	public_single(options) {
+		return super.single(options, { _id: options.id, "meta.public": true });
+	}
+
+
+
 
 
 	create(data) {
