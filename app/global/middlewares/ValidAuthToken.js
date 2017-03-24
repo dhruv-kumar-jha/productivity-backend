@@ -42,7 +42,12 @@ module.exports = ( req, res, next ) => {
 						// throw new Error('Your token has expired. please login again to generate new token.');
 						res.json( Response.error(401, 'Unauthorized', 'Your token has expired. please login again to generate new token.') );
 					} else {
-						res.json( Response.authError() );
+						if ( req.method === 'POST' && publicOperations.includes(req.body.operationName) ) {
+							next();
+						} else {
+							res.json( Response.authError() );
+						}
+						// res.json( Response.authError() );
 					}
 				}
 				else {
@@ -65,7 +70,6 @@ module.exports = ( req, res, next ) => {
 
 				const operationName = req.body.operationName;
 
-				// if ( operationName === 'Login' || operationName === 'Signup' || operationName === 'Logout' ) {
 				if ( publicOperations.includes(operationName) ) {
 					next();
 				} else {

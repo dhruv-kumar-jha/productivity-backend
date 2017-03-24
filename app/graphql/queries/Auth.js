@@ -3,6 +3,7 @@
 const GraphQL = require('graphql');
 const {
 	GraphQLID,
+	GraphQLBoolean,
 } = GraphQL;
 
 const AuthResolver = require('../resolvers/Auth');
@@ -15,6 +16,10 @@ const UserLogoutType = new GraphQL.GraphQLObjectType({
 		id: {
 			type: GraphQLID,
 			description: 'ID of the logged out user',
+		},
+		status: {
+			type: GraphQLBoolean,
+			description: 'If the logout was successful',
 		}
 	})
 
