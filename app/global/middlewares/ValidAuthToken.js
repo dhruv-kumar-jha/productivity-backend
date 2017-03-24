@@ -39,8 +39,12 @@ module.exports = ( req, res, next ) => {
 			jwt.verify( token, config.server.WEB_TOKEN_SECRET, (err, decoded_user) => {
 				if ( err ) {
 					if ( err.name === 'TokenExpiredError' ) {
-						// throw new Error('Your token has expired. please login again to generate new token.');
-						res.json( Response.error(401, 'Unauthorized', 'Your token has expired. please login again to generate new token.') );
+						if ( req.method === 'POST' && publicOperations.includes(req.body.operationName) ) {
+							next();
+						} else {
+							// throw new Error('Your token has expired. please login again to generate new token.');
+							res.json( Response.error(401, 'Unauthorized', 'Your token has expired. please login again to generate new token.') );
+						}
 					} else {
 						if ( req.method === 'POST' && publicOperations.includes(req.body.operationName) ) {
 							next();
