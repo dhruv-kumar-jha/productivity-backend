@@ -6,7 +6,7 @@ const cors = require('cors');
 const config = require('app/global/config');
 const mongoose = require('mongoose');
 
-const ValidAuthTokenMiddleware = require('app/global/middlewares/ValidAuthToken');
+const AccessValidatorMiddleware = require('app/global/middlewares/AccessValidator');
 
 const expressGraphQL = require('express-graphql');
 const GraphQLSchema = require('app/graphql');
@@ -26,7 +26,7 @@ app.use( body_parser.json({ limit: '50mb' }) );
 app.use( body_parser.urlencoded({ limit: '50mb', extended: true }) );
 
 // make sure all the requests are made by authenticated users.
-app.use( ValidAuthTokenMiddleware );
+app.use( AccessValidatorMiddleware );
 
 
 // disable graphiql in production., so other users cant access the graphiql ui
@@ -41,7 +41,12 @@ app.use(
 );
 
 app.get( '/', (req, res) => {
-	res.json({ code: 200, online: true, message: 'success' });
+	res.json({
+		code: 200,
+		online: true,
+		message: 'success',
+		description: 'Welcome, this is the backend for the productivity application.'
+	});
 });
 
 

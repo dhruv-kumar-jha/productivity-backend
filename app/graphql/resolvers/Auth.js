@@ -38,7 +38,7 @@ class AuthController extends ModelController {
 
 
 	logout(options) {
-		const id = this.store.user.id;
+		const id = this.store.user ? this.store.user.id : 0;
 		return { status: true, id: id };
 	}
 
