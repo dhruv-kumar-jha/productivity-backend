@@ -31,6 +31,11 @@ module.exports = {
 					type: new GraphQLNonNull(GraphQLString),
 					description: 'Enter users password, will be automatically hashed',
 				},
+				language: {
+					type: GraphQLString,
+					description: 'Enter users preferred language',
+				},
+
 				phone: {
 					type: GraphQLString,
 					description: 'Enter users phone number',
@@ -78,6 +83,10 @@ module.exports = {
 				password: {
 					type: GraphQLString,
 					description: 'Enter users password, will be automatically hashed',
+				},
+				language: {
+					type: GraphQLString,
+					description: 'Enter users preferred language',
 				},
 				phone: {
 					type: GraphQLString,

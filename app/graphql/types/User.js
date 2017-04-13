@@ -29,6 +29,11 @@ const UserType = new GraphQL.GraphQLObjectType({
 			type: GraphQLString,
 			description: 'Email address of the user, must be valid and unique',
 		},
+		language: {
+			type: GraphQLString,
+			description: 'Language specified by the user',
+		},
+
 		phone: {
 			type: GraphQLString,
 			description: 'Phone number of the user',

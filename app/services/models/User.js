@@ -21,6 +21,12 @@ const UserSchema = mongoose.Schema(
 		password: {
 			type: String
 		},
+
+		language: {
+			type: String,
+			default: 'en'
+		},
+
 		phone: {
 			type: String
 		},
