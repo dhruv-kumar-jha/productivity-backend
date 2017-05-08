@@ -28,6 +28,10 @@ module.exports = {
 					type: GraphQLString,
 					description: 'Enter board description',
 				},
+				group: {
+					type: GraphQLID,
+					description: 'Enter Group id',
+				},
 			},
 			resolve(parent, fields) {
 				return BoardResolver.create(fields);
@@ -55,6 +59,10 @@ module.exports = {
 				description: {
 					type: GraphQLString,
 					description: 'Enter board description',
+				},
+				group: {
+					type: GraphQLID,
+					description: 'Enter Group id',
 				},
 				meta: {
 					type: GraphQLMixed,

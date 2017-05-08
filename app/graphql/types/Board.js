@@ -36,6 +36,10 @@ const BoardType = new GraphQL.GraphQLObjectType({
 			type: GraphQLString,
 			description: 'This is the boards description',
 		},
+		group: {
+			type: GraphQLString,
+			description: 'Group in which this board belongs to',
+		},
 		meta: {
 			type: GraphQLMixed,
 			description: 'Meta information about this board',

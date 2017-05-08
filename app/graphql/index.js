@@ -22,6 +22,8 @@ const ListMutation = require('./mutations/List');
 const CardQuery = require('./queries/Card');
 const CardMutation = require('./mutations/Card');
 
+const GroupQuery = require('./queries/Group');
+const GroupMutation = require('./mutations/Group');
 
 
 
@@ -47,6 +49,9 @@ const RootQuery = new GraphQLObjectType({
 
 		cards: CardQuery.index(),
 		card: CardQuery.single(),
+
+		groups: GroupQuery.index(),
+
 	},
 });
 
@@ -80,6 +85,9 @@ const RootMutation = new GraphQLObjectType({
 		updateTodo: CardMutation.updateTodo(),
 		deleteTodo: CardMutation.deleteTodo(),
 
+		addGroup: GroupMutation.create(),
+		updateGroup: GroupMutation.update(),
+		deleteGroup: GroupMutation.delete(),
 
 	},
 });

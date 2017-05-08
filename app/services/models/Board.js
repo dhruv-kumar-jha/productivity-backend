@@ -19,6 +19,10 @@ const BoardSchema = mongoose.Schema(
 		description: {
 			type: String
 		},
+		group: {
+			type: mongoose.Schema.ObjectId,
+			ref: 'Group'
+		},
 
 		// this might contain background { color, image } fields.
 		// not yet decided.
